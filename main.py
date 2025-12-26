@@ -118,21 +118,27 @@ def main():
         
         # 4. Process Excel file
         if os.path.exists(excel_file_path):
-            print(f"📊 Processing Excel file: {os.path.basename(excel_file_path)}\n")
+            print(f"Processing Excel file: {os.path.basename(excel_file_path)}\n")
             
             result = process_excel_file(excel_file_path, matcher)
             
-            # Output as JSON
-            json_output = json.dumps(result, indent=2, ensure_ascii=False)
-            print(json_output)
+            # Generate output filename
+            base_name = os.path.splitext(os.path.basename(excel_file_path))[0]
+            output_filename = f"{base_name}_mapping_result.json"
+            output_path = os.path.join(os.path.dirname(os.path.abspath(excel_file_path)), output_filename)
             
-            print(f"\n✅ Done! Processed {result['overall_summary']['total_headers']} headers from {result['overall_summary']['total_sheets']} sheet(s)")
+            # Write JSON to file
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(result, f, indent=2, ensure_ascii=False)
+            
+            print(f"Done! Processed {result['overall_summary']['total_headers']} headers from {result['overall_summary']['total_sheets']} sheet(s)")
+            print(f"Output saved to: {output_path}")
         else:
-            print(f"❌ File not found: {excel_file_path}")
+            print(f"File not found: {excel_file_path}")
             sys.exit(1)
     
     except Exception as ex:
-        print(f"❌ Error: {str(ex)}")
+        print(f" Error: {str(ex)}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
