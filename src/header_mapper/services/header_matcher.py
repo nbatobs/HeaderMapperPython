@@ -1,10 +1,10 @@
 from typing import Dict, List, Optional
 from rapidfuzz import fuzz
-from models.column_schema import ColumnSchema
-from models.mapping_result import MappingResult
-from models.matching_config import MatchingConfig
-from enums.header_match_type import HeaderMatchType
-from enums.mapping_action import MappingAction
+from header_mapper.models.column_schema import ColumnSchema
+from header_mapper.models.mapping_result import MappingResult
+from header_mapper.models.matching_config import MatchingConfig
+from header_mapper.enums.header_match_type import HeaderMatchType
+from header_mapper.enums.mapping_action import MappingAction
 
 class HeaderMatcher:
     """Matches user-provided headers to canonical schema columns"""

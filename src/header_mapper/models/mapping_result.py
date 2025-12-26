@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from enums.header_match_type import HeaderMatchType
-from enums.mapping_action import MappingAction
+from header_mapper.enums.header_match_type import HeaderMatchType
+from header_mapper.enums.mapping_action import MappingAction
 
 @dataclass
 class MappingResult:

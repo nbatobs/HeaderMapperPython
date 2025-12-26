@@ -1,7 +1,7 @@
 import openpyxl
 from typing import List
 from datetime import datetime
-from models.sheet_headers import SheetHeaders, ExcelHeaderResult
+from header_mapper.models.sheet_headers import SheetHeaders, ExcelHeaderResult
 
 class ExcelHeaderExtractor:
     """Extracts headers from Excel files, intelligently detecting and merging multiple header rows"""

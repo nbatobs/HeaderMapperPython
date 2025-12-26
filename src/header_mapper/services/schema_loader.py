@@ -1,7 +1,7 @@
 import json
 import os
 from typing import Dict
-from models.column_schema import ColumnSchema
+from header_mapper.models.column_schema import ColumnSchema
 
 class SchemaLoader:
     """Loads canonical column schemas from JSON files"""

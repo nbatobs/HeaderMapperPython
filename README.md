@@ -18,23 +18,30 @@ A Python script that reads Excel files and maps their headers to canonical schem
 
 ```
 HeaderMapperPython/
-├── main.py                 # Main script entry point
-├── requirements.txt        # Python dependencies
-├── enums/                  # Enum definitions
-│   ├── __init__.py
-│   ├── header_match_type.py
-│   └── mapping_action.py
-├── models/                 # Data models
-│   ├── __init__.py
-│   ├── column_schema.py
-│   ├── mapping_result.py
-│   ├── matching_config.py
-│   └── sheet_headers.py
-└── services/               # Business logic services
-    ├── __init__.py
-    ├── schema_loader.py
-    ├── excel_header_extractor.py
-    └── header_matcher.py
+├── src/
+│   └── header_mapper/
+│       ├── __init__.py
+│       ├── main.py            # Main script entry point
+│       ├── enums/             # Enum definitions
+│       │   ├── __init__.py
+│       │   ├── header_match_type.py
+│       │   └── mapping_action.py
+│       ├── models/            # Data models
+│       │   ├── __init__.py
+│       │   ├── column_schema.py
+│       │   ├── mapping_result.py
+│       │   ├── matching_config.py
+│       │   └── sheet_headers.py
+│       ├── services/          # Business logic services
+│       │   ├── __init__.py
+│       │   ├── schema_loader.py
+│       │   ├── excel_header_extractor.py
+│       │   └── header_matcher.py
+│       └── aliases/           # Schema alias files
+├── run.py                     # Convenience runner script
+├── pyproject.toml             # Poetry configuration
+├── requirements.txt           # Python dependencies
+└── README.md
 ```
 
 ## Installation
@@ -60,16 +67,21 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Using Poetry
+### Using Poetry (Recommended)
 
 ```bash
-poetry run python main.py path/to/your/file.xlsx
+poetry run python run.py path/to/your/file.xlsx
+```
+
+Or using the module directly:
+```bash
+poetry run python -m header_mapper.main path/to/your/file.xlsx
 ```
 
 ### Using Python directly
 
 ```bash
-python main.py path/to/your/file.xlsx
+python run.py path/to/your/file.xlsx
 ```
 
 The script will:

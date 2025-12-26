@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "HeaderMapper implemented in Python"
 authors = ["Your Name <your.email@example.com>"]
 readme = "README.md"
-packages = [{include = "**/*.py", from = "."}]
+packages = [{include = "header_mapper", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"

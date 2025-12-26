@@ -8,11 +8,11 @@ import sys
 import json
 import os
 from typing import List
-from services.schema_loader import SchemaLoader
-from services.excel_header_extractor import ExcelHeaderExtractor
-from services.header_matcher import HeaderMatcher
-from models.matching_config import MatchingConfig
-from enums.mapping_action import MappingAction
+from header_mapper.services.schema_loader import SchemaLoader
+from header_mapper.services.excel_header_extractor import ExcelHeaderExtractor
+from header_mapper.services.header_matcher import HeaderMatcher
+from header_mapper.models.matching_config import MatchingConfig
+from header_mapper.enums.mapping_action import MappingAction
 
 def process_excel_file(file_path: str, matcher: HeaderMatcher) -> dict:
     """Process an Excel file and return the mapping results as a dictionary"""
