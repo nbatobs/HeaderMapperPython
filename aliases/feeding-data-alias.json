@@ -1,0 +1,427 @@
+{
+  "date": {
+    "canonicalName": "date",
+    "description": "The calendar date on which the feeding data was recorded.",
+    "dataType": "date",
+    "required": true,
+    "exampleValues": ["2024-01-01", "2024-06-15"],
+    "aliases": [
+      "date",
+      "measurement date",
+      "day"
+    ]
+  },
+
+  "feeding_site_maize_t": {
+    "canonicalName": "feeding_site_maize_t",
+    "description": "Amount of maize from the site fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["99.807", "100"],
+    "aliases": [
+      "site maize",
+      "site maize (t)",
+      "site maize feeding"
+    ]
+  },
+
+  "feeding_site_rye_t": {
+    "canonicalName": "feeding_site_rye_t",
+    "description": "Amount of rye from the site fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["8.664", "9"],
+    "aliases": [
+      "site rye",
+      "site rye (t)",
+      "site rye feeding"
+    ]
+  },
+
+  "feeding_external_maize_t": {
+    "canonicalName": "feeding_external_maize_t",
+    "description": "Amount of maize sourced externally fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "50"],
+    "aliases": [
+      "external maize",
+      "external maize (t)",
+      "external maize feeding"
+    ]
+  },
+
+  "feeding_external_rye_t": {
+    "canonicalName": "feeding_external_rye_t",
+    "description": "Amount of rye sourced externally fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "10"],
+    "aliases": [
+      "external rye",
+      "external rye (t)",
+      "external rye feeding"
+    ]
+  },
+
+  "feeding_external_grain_maize_t": {
+    "canonicalName": "feeding_external_grain_maize_t",
+    "description": "Amount of grain maize sourced externally fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "20"],
+    "aliases": [
+      "external grain maize",
+      "external grain maize (t)",
+      "external grain maize feeding"
+    ]
+  },
+
+  "feeding_site_grass_t": {
+    "canonicalName": "feeding_site_grass_t",
+    "description": "Amount of grass from the site fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["8.029", "8"],
+    "aliases": [
+      "site grass",
+      "site grass (t)",
+      "site grass feeding"
+    ]
+  },
+
+  "feeding_beet_pulp_t": {
+    "canonicalName": "feeding_beet_pulp_t",
+    "description": "Amount of beet pulp fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "15"],
+    "aliases": [
+      "beet pulp",
+      "beet pulp (t)",
+      "beet pulp feeding"
+    ]
+  },
+
+  "feeding_cattle_manure_t": {
+    "canonicalName": "feeding_cattle_manure_t",
+    "description": "Amount of cattle manure fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "25"],
+    "aliases": [
+      "cattle manure",
+      "cattle manure (t)",
+      "cattle manure feeding"
+    ]
+  },
+
+  "feeding_total_maize_t": {
+    "canonicalName": "feeding_total_maize_t",
+    "description": "Total amount of maize (site and external) fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["99.807", "150"],
+    "aliases": [
+      "total maize",
+      "total maize (t)",
+      "total maize feeding"
+    ]
+  },
+
+  "feeding_total_rye_t": {
+    "canonicalName": "feeding_total_rye_t",
+    "description": "Total amount of rye (site and external) fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["8.664", "19"],
+    "aliases": [
+      "total rye",
+      "total rye (t)",
+      "total rye feeding"
+    ]
+  },
+
+  "feeding_total_feed_t": {
+    "canonicalName": "feeding_total_feed_t",
+    "description": "Total amount of all feedstocks fed into the digester.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["116.5", "200"],
+    "aliases": [
+      "total feed",
+      "total feed (t)"
+    ]
+  },
+
+  "maize_dry_matter_%": {
+    "canonicalName": "maize_dry_matter_%",
+    "description": "Dry matter content of maize feedstock.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["34.071", "35"],
+    "aliases": [
+      "maize dry matter",
+      "maize dry matter (%)",
+      "maize dm"
+    ]
+  },
+
+  "rye_dry_matter_%": {
+    "canonicalName": "rye_dry_matter_%",
+    "description": "Dry matter content of rye feedstock.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["27.47", "28"],
+    "aliases": [
+      "rye dry matter",
+      "rye dry matter (%)",
+      "rye dm"
+    ]
+  },
+
+  "grass_dry_matter_%": {
+    "canonicalName": "grass_dry_matter_%",
+    "description": "Dry matter content of grass feedstock.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["19.65", "20"],
+    "aliases": [
+      "grass dry matter",
+      "grass dry matter (%)",
+      "grass dm"
+    ]
+  },
+
+  "grain_maize_dry_matter_%": {
+    "canonicalName": "grain_maize_dry_matter_%",
+    "description": "Dry matter content of grain maize feedstock.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "85"],
+    "aliases": [
+      "grain maize",
+      "grain maize (%)",
+      "grain maize dm"
+    ]
+  },
+
+  "beet_pulp_dry_matter_%": {
+    "canonicalName": "beet_pulp_dry_matter_%",
+    "description": "Dry matter content of beet pulp feedstock.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "22"],
+    "aliases": [
+      "beet pulp",
+      "beet pulp (%)",
+      "beet pulp dm"
+    ]
+  },
+
+  "cattle_manure_t": {
+    "canonicalName": "cattle_manure_t",
+    "description": "Amount of cattle manure in tonnes",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "12"],
+    "aliases": [
+      "cattle manure",
+      "cattle manure (%)",
+      "cattle manure dm"
+    ]
+  },
+
+  "feeding_feed_dm_t": {
+    "canonicalName": "feeding_feed_dm_t",
+    "description": "Total dry matter in tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["37.963", "40"],
+    "aliases": [
+      "feed dm",
+      "feed dm (t)",
+      "total feed dm"
+    ]
+  },
+
+  "olr_dm_kg_dig_day": {
+    "canonicalName": "olr_dm_kg_dig_day",
+    "description": "Organic loading rate based on dry matter.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["12.57", "13"],
+    "aliases": [
+      "olr dm",
+      "olr dm (kg dm/dig/day)",
+      "organic loading rate dm"
+    ]
+  },
+
+  "olr_fm_kg_dig_day": {
+    "canonicalName": "olr_fm_kg_dig_day",
+    "description": "Organic loading rate based on fresh matter.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["38.576", "40"],
+    "aliases": [
+      "olr fm",
+      "olr fm (kg fm/dig/day)",
+      "organic loading rate fm"
+    ]
+  },
+
+  "stock_levels_site_maize_t": {
+    "canonicalName": "stock_levels_site_maize_t",
+    "description": "Proportion of site maize in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["22134.339", "22000"],
+    "aliases": [
+      "site maize",
+      "site maize (t)",
+      "site maize proportion"
+    ]
+  },
+
+  "stock_levels_site_rye_t": {
+    "canonicalName": "stock_levels_site_rye_t",
+    "description": "Proportion of site rye in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["3787.893", "3800"],
+    "aliases": [
+      "site rye",
+      "site rye (t)",
+      "site rye proportion"
+    ]
+  },
+
+  "stock_levels_external_maize_t": {
+    "canonicalName": "stock_levels_external_maize_t",
+    "description": "Proportion of external maize in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["989", "1000"],
+    "aliases": [
+      "external maize",
+      "external maize (t)",
+      "external maize proportion"
+    ]
+  },
+
+  "stock_levels_external_rye_t": {
+    "canonicalName": "stock_levels_external_rye_t",
+    "description": "Proportion of external rye in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "500"],
+    "aliases": [
+      "external rye",
+      "external rye (t)",
+      "external rye proportion"
+    ]
+  },
+
+  "stock_levels_external_grain_maize_t": {
+    "canonicalName": "stock_levels_external_grain_maize_t",
+    "description": "Proportion of external grain maize in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "300"],
+    "aliases": [
+      "external grain maize",
+      "external grain maize (t)",
+      "external grain maize proportion"
+    ]
+  },
+
+  "stock_levels_site_grass_t": {
+    "canonicalName": "stock_levels_site_grass_t",
+    "description": "Proportion of site grass in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["1332.828", "1300"],
+    "aliases": [
+      "site grass",
+      "site grass (t)",
+      "site grass proportion"
+    ]
+  },
+
+  "stock_levels_beet_pulp_t": {
+    "canonicalName": "stock_levels_beet_pulp_t",
+    "description": "Proportion of beet pulp in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "200"],
+    "aliases": [
+      "beet pulp",
+      "beet pulp (t)",
+      "beet pulp proportion"
+    ]
+  },
+
+  "stock_levels_cattle_manure_t": {
+    "canonicalName": "stock_levels_cattle_manure_t",
+    "description": "Proportion of cattle manure in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "400"],
+    "aliases": [
+      "cattle manure",
+      "cattle manure (t)",
+      "cattle manure proportion"
+    ]
+  },
+
+  "stock_levels_total_maize_t": {
+    "canonicalName": "stock_levels_total_maize_t",
+    "description": "Total proportion of maize in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["23123.339", "23000"],
+    "aliases": [
+      "total maize",
+      "total maize (t)",
+      "total maize proportion"
+    ]
+  },
+
+  "stock_levels_total_rye_t": {
+    "canonicalName": "stock_levels_total_rye_t",
+    "description": "Total proportion of rye in fresh matter tonnes.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["3787.893", "3800"],
+    "aliases": [
+      "total rye",
+      "total rye (t)",
+      "total rye proportion"
+    ]
+  },
+
+  "feeding_proportions_in_tonnnes_of_fresh_matter_digester_1": {
+    "canonicalName": "feeding_proportions_in_tonnnes_of_fresh_matter_digester_1",
+    "description": "Value related to Digester 1, possibly feed allocation or other metric.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "10000"],
+    "aliases": [
+      "digester 1",
+      "feeding proportions digester 1"
+    ]
+  },
+
+  "feeding_proportions_in_tonnnes_of_fresh_matter_digester_2": {
+    "canonicalName": "feeding_proportions_in_tonnnes_of_fresh_matter_digester_2",
+    "description": "Value related to Digester 2, possibly feed allocation or other metric.",
+    "dataType": "number",
+    "required": false,
+    "exampleValues": ["0", "10000"],
+    "aliases": [
+      "digester 2",
+      "feeding proportions digester 2"
+    ]
+  }
+}
