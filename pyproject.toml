@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "headermapper"
+version = "1.0.0"
+description = "HeaderMapper implemented in Python"
+authors = ["Tobi <hectorogunsanya@gmail.com>"]
+readme = "README.md"
+packages = [{include = "header_mapper", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+openpyxl = ">=3.1.2"
+rapidfuzz = ">=3.0.0"
+
+[tool.poetry.scripts]
+header-mapper = "header_mapper.main:start"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
