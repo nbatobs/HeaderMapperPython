@@ -9,9 +9,14 @@ from header_mapper.enums.mapping_action import MappingAction
 class HeaderMatcher:
     """Matches user-provided headers to canonical schema columns"""
     
-    def __init__(self, schema: Dict[str, ColumnSchema], config: Optional[MatchingConfig] = None):
+    def __init__(self, schema: Dict[str, ColumnSchema], config: Optional[MatchingConfig] = None, ai_matcher=None):
         self.schema = schema
         self.config = config if config is not None else MatchingConfig()
+        self.ai_matcher = ai_matcher
+        
+        # Precompute embeddings if AI matcher is provided
+        if self.ai_matcher:
+            self.ai_matcher.precompute_schema_embeddings(schema)
     
     def map_headers(self, user_headers: List[str]) -> List[MappingResult]:
         """Map a list of user headers to canonical columns"""
@@ -48,6 +53,14 @@ class HeaderMatcher:
         
         # Layer 3: Fuzzy matching
         best_match = self._find_best_fuzzy_match(user_header, normalized_user_header)
+        
+        # Layer 4: AI semantic matching (if fuzzy match confidence is low or no match)
+        if self.ai_matcher and (not best_match or best_match.confidence < 0.75):
+            ai_match = self._find_best_ai_match(user_header)
+            
+            # Use AI match if it's better than fuzzy match
+            if ai_match and (not best_match or ai_match.confidence > best_match.confidence):
+                return ai_match
         
         if best_match:
             return best_match
@@ -113,6 +126,31 @@ class HeaderMatcher:
         
         return None
     
+    def _find_best_ai_match(self, user_header: str) -> Optional[MappingResult]:
+        """Find best AI semantic match"""
+        matches = self.ai_matcher.find_semantic_match(user_header, top_k=1)
+        
+        if not matches:
+            return None
+        
+        key, similarity = matches[0]
+        schema = self.schema[key]
+        
+        # Convert cosine similarity (0-1) to confidence
+        # Only consider matches above 0.6 similarity
+        if similarity >= 0.6:
+            confidence = similarity  # Use similarity directly as confidence
+            action = self._determine_action(confidence, schema.required)
+            
+            return MappingResult(
+                user_column=user_header,
+                canonical_column=schema.canonical_name,
+                confidence=confidence,
+                recommended_action=action
+            )
+        
+        return None
+    
     def _normalize_header(self, header: str) -> str:
         """Normalize a header string for comparison"""
         if not header:
@@ -171,8 +209,6 @@ class HeaderMatcher:
                     user_column=user_header,
                     canonical_column=schema.canonical_name,
                     confidence=best_score / 100.0,
-                    match_type=HeaderMatchType.FUZZY_MATCH,
-                    match_details=f"Matched against '{match_target}'",
                     recommended_action=self._determine_action(best_score / 100.0, schema.required)
                 ))
         

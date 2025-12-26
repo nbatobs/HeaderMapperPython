@@ -14,6 +14,13 @@ from header_mapper.services.header_matcher import HeaderMatcher
 from header_mapper.models.matching_config import MatchingConfig
 from header_mapper.enums.mapping_action import MappingAction
 
+# Try to import AI matcher (optional dependency)
+try:
+    from header_mapper.services.ai_matcher import AISemanticMatcher
+    AI_AVAILABLE = True
+except ImportError:
+    AI_AVAILABLE = False
+
 def process_excel_file(file_path: str, matcher: HeaderMatcher) -> dict:
     """Process an Excel file and return the mapping results as a dictionary"""
     extractor = ExcelHeaderExtractor()
@@ -97,13 +104,28 @@ def start():
             sys.exit(1)
         
         schema = schema_loader.load_all_schemas(aliases_dir)
-        print(f"Loaded {len(schema)} canonical columns from schema files\n")
+        print(f"✓ Loaded {len(schema)} canonical columns from schema files")
         
-        # 2. Configure matching
+        # 2. Initialize AI matcher if available
+        ai_matcher = None
+        if AI_AVAILABLE:
+            print("✓ Initializing AI semantic matcher...")
+            try:
+                ai_matcher = AISemanticMatcher()
+                print("✓ AI semantic matching enabled")
+            except Exception as e:
+                print(f"⚠ Could not initialize AI matcher: {e}")
+                print("  Continuing with fuzzy matching only")
+        else:
+            print("⚠ AI semantic matching not available")
+            print("  Install with: pip install sentence-transformers")
+        print()
+        
+        # 3. Configure matching
         config = MatchingConfig(
             fuzzy_min_threshold=65
         )
-        matcher = HeaderMatcher(schema, config)
+        matcher = HeaderMatcher(schema, config, ai_matcher=ai_matcher)
         
         # 3. Get Excel file path
         excel_file_path = None
