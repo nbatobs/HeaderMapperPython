@@ -92,12 +92,12 @@ def main():
         aliases_dir = os.path.join(script_dir, "aliases")
         
         if not os.path.exists(aliases_dir):
-            print("❌ Error: 'aliases' directory not found")
+            print("Error: 'aliases' directory not found")
             print(f"   Expected location: {aliases_dir}")
             sys.exit(1)
         
         schema = schema_loader.load_all_schemas(aliases_dir)
-        print(f"✓ Loaded {len(schema)} canonical columns from schema files\n")
+        print(f"Loaded {len(schema)} canonical columns from schema files\n")
         
         # 2. Configure matching
         config = MatchingConfig(

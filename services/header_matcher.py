@@ -32,8 +32,6 @@ class HeaderMatcher:
                     user_column=user_header,
                     canonical_column=schema.canonical_name,
                     confidence=1.0,
-                    match_type=HeaderMatchType.EXACT_MATCH,
-                    match_details="Exact match to canonical name",
                     recommended_action=MappingAction.AUTO_MAP
                 )
         
@@ -45,8 +43,6 @@ class HeaderMatcher:
                         user_column=user_header,
                         canonical_column=schema.canonical_name,
                         confidence=0.95,
-                        match_type=HeaderMatchType.ALIAS_MATCH,
-                        match_details=f"Matched alias: '{alias}'",
                         recommended_action=MappingAction.AUTO_MAP
                     )
         
@@ -61,8 +57,6 @@ class HeaderMatcher:
             user_column=user_header,
             canonical_column="",
             confidence=0.0,
-            match_type=HeaderMatchType.NO_MATCH,
-            match_details="No suitable match found",
             recommended_action=MappingAction.MANUAL_MAP
         )
     
@@ -114,8 +108,6 @@ class HeaderMatcher:
                 user_column=user_header,
                 canonical_column=canonical,
                 confidence=confidence,
-                match_type=HeaderMatchType.FUZZY_MATCH,
-                match_details=f"Fuzzy match against '{target}' (score: {score})",
                 recommended_action=action
             )
         
