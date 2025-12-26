@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "headermapper"
-version = "0.1.0"
+version = "1.0.0"
 description = "HeaderMapper implemented in Python"
 authors = ["Tobi <hectorogunsanya@gmail.com>"]
 readme = "README.md"
