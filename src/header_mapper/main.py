@@ -76,7 +76,7 @@ def process_excel_file(file_path: str, matcher: HeaderMatcher) -> dict:
     
     return output
 
-def main():
+def start():
     """Main entry point for the script"""
     print("═" * 55)
     print("  Header Mapper - Excel to Schema Matching")
@@ -144,4 +144,4 @@ def main():
         sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    start()

@@ -2,7 +2,7 @@
 """
 Convenience script to run header_mapper.main
 """
-from header_mapper.main import main
+from header_mapper.main import start
 
 if __name__ == "__main__":
-    main()
+    start()

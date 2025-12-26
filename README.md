@@ -69,11 +69,17 @@ pip install -r requirements.txt
 
 ### Using Poetry (Recommended)
 
+**Option 1: Using the entry point (cleanest):**
+```bash
+poetry run header-mapper path/to/your/file.xlsx
+```
+
+**Option 2: Using the convenience script:**
 ```bash
 poetry run python run.py path/to/your/file.xlsx
 ```
 
-Or using the module directly:
+**Option 3: Using the module directly:**
 ```bash
 poetry run python -m header_mapper.main path/to/your/file.xlsx
 ```
