@@ -1,6 +1,6 @@
 # Header Mapper - Python Version
 
-A Python script that reads Excel files and maps their headers to canonical schema columns using exact matching, alias matching, and fuzzy matching algorithms.
+A Python tool that reads Excel files and maps their headers to canonical schema columns using exact matching, alias matching, and fuzzy matching algorithms.
 
 ## Features
 
@@ -11,8 +11,8 @@ A Python script that reads Excel files and maps their headers to canonical schem
   2. Alias matching from predefined aliases
   3. Fuzzy matching using RapidFuzz for approximate matches
 - **Confidence-Based Recommendations**: Provides action recommendations (Auto-map, Review, Manual)
-- **JSON Output**: Returns results in structured JSON format
-- **High Performance**: Uses Rust-based libraries for fast Excel reading and fuzzy matching
+- **JSON Output**: Returns results in structured JSON format with detailed statistics
+- **High Performance**: Uses RapidFuzz for fast fuzzy string matching
 
 ## Project Structure
 
@@ -21,26 +21,30 @@ HeaderMapperPython/
 ├── src/
 │   └── header_mapper/
 │       ├── __init__.py
-│       ├── main.py            # Main script entry point
-│       ├── enums/             # Enum definitions
+│       ├── main.py                    # Main script entry point
+│       ├── enums/                     # Enum definitions
 │       │   ├── __init__.py
 │       │   ├── header_match_type.py
 │       │   └── mapping_action.py
-│       ├── models/            # Data models
+│       ├── models/                    # Data models
 │       │   ├── __init__.py
 │       │   ├── column_schema.py
 │       │   ├── mapping_result.py
 │       │   ├── matching_config.py
 │       │   └── sheet_headers.py
-│       ├── services/          # Business logic services
+│       ├── services/                  # Business logic services
 │       │   ├── __init__.py
 │       │   ├── schema_loader.py
 │       │   ├── excel_header_extractor.py
 │       │   └── header_matcher.py
-│       └── aliases/           # Schema alias files
-├── run.py                     # Convenience runner script
-├── pyproject.toml             # Poetry configuration
-├── requirements.txt           # Python dependencies
+│       └── aliases/                   # Schema alias JSON files
+│           ├── feeding-data-alias.json
+│           ├── production-data-alias.json
+│           ├── stirrer-data-alias.json
+│           └── tank-data-alias.json
+├── run.py                             # Convenience runner script
+├── pyproject.toml                     # Poetry configuration
+├── requirements.txt                   # Python dependencies
 └── README.md
 ```
 
@@ -109,10 +113,14 @@ The script will:
       "mappings": [
         {
           "userColumn": "Date Time",
-          "canonicalColumn": "DateTime",
+          "canonicalColumn": "date",
           "confidence": 1.0,
-          "matchType": "ExactMatch",
-          "matchDetails": "Exact match to canonical name",
+          "recommendedAction": "AutoMap"
+        },
+        {
+          "userColumn": "Feeding Maize",
+          "canonicalColumn": "feeding_site_maize_t",
+          "confidence": 0.95,
           "recommendedAction": "AutoMap"
         }
       ],
@@ -142,9 +150,11 @@ The matching behavior can be configured in the `main.py` file:
 
 ```python
 config = MatchingConfig(
-    fuzzy_min_threshold=20  # Minimum fuzzy match score (0-100)
+    fuzzy_min_threshold=65  # Minimum fuzzy match score (0-100)
 )
 ```
+
+### Matching Thresholds
 
 Thresholds for different actions:
 - **Required fields**:
@@ -158,29 +168,47 @@ Thresholds for different actions:
 
 ## Dependencies
 
-Modern, high-performance packages (2025):
-- **python-calamine**: Rust-based Excel reader for massive speed improvements
-- **rapidfuzz**: Fast fuzzy string matching with better licensing and performance
+- **Python**: ^3.9
+- **openpyxl**: >=3.1.2 - Excel file reading and writing
+- **rapidfuzz**: >=3.0.0 - Fast fuzzy string matching
 
 ## Schema Files
 
-The script expects JSON schema files in the `aliases` directory (located in the same folder as the script). Schema files should follow this format:
+The tool includes four predefined schema files in the `src/header_mapper/aliases/` directory:
+- `feeding-data-alias.json` - Feeding and substrate data schema
+- `production-data-alias.json` - Biogas production metrics schema
+- `stirrer-data-alias.json` - Mixer/stirrer performance data schema
+- `tank-data-alias.json` - Digester tank parameters schema
+
+Each schema file follows this format:
 
 ```json
 {
   "columnKey": {
-    "canonicalName": "ColumnName",
+    "canonicalName": "column_name",
     "description": "Description of the column",
     "dataType": "string",
     "required": true,
     "exampleValues": ["example1", "example2"],
-    "aliases": ["alias1", "alias2"]
+    "aliases": ["alias1", "alias2", "alias 3"]
   }
 }
 ```
 
+## How It Works
+
+1. **Schema Loading**: Loads all canonical column definitions from JSON files
+2. **Header Extraction**: Reads Excel file and detects header rows (handles multi-row headers)
+3. **Three-Layer Matching**:
+   - **Exact Match** (100% confidence): Direct match to canonical name
+   - **Alias Match** (95% confidence): Match to predefined aliases
+   - **Fuzzy Match** (variable confidence): Uses RapidFuzz for similar strings
+4. **Action Recommendation**: Based on confidence and field requirements
+5. **JSON Output**: Saves detailed mapping results with statistics
+
 ## Notes
 
-- The script looks for the `aliases` directory in the same folder as `main.py`
+- The tool looks for the `aliases` directory in `src/header_mapper/aliases/`
 - All output is in JSON format for easy integration with other tools
-- The script maintains the same logic and functionality as the C# version
+- Handles merged cells and multi-row headers automatically
+- Output file is saved in the same directory as the input Excel file

@@ -101,7 +101,7 @@ def start():
         
         # 2. Configure matching
         config = MatchingConfig(
-            fuzzy_min_threshold=20
+            fuzzy_min_threshold=65
         )
         matcher = HeaderMatcher(schema, config)
         
