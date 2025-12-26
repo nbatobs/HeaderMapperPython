@@ -6,13 +6,13 @@ A Python script that reads Excel files and maps their headers to canonical schem
 
 - **Multi-sheet Excel Support**: Processes all sheets in an Excel file
 - **Intelligent Header Detection**: Automatically detects and merges multi-row headers
-- **Merged Cell Handling**: Properly handles merged cells in Excel headers
 - **Three-Layer Matching**:
   1. Exact match to canonical names
   2. Alias matching from predefined aliases
-  3. Fuzzy matching using FuzzyWuzzy for approximate matches
+  3. Fuzzy matching using RapidFuzz for approximate matches
 - **Confidence-Based Recommendations**: Provides action recommendations (Auto-map, Review, Manual)
 - **JSON Output**: Returns results in structured JSON format
+- **High Performance**: Uses Rust-based libraries for fast Excel reading and fuzzy matching
 
 ## Project Structure
 
@@ -39,19 +39,34 @@ HeaderMapperPython/
 
 ## Installation
 
+### Using Poetry (Recommended)
+
 1. Navigate to the HeaderMapperPython directory:
 ```bash
 cd HeaderMapperPython
 ```
 
-2. Install required dependencies:
+2. Install dependencies using Poetry:
+```bash
+poetry install
+```
+
+### Using pip
+
+Alternatively, you can install dependencies directly with pip:
 ```bash
 pip install -r requirements.txt
 ```
 
 ## Usage
 
-Run the script with an Excel file as an argument:
+### Using Poetry
+
+```bash
+poetry run python main.py path/to/your/file.xlsx
+```
+
+### Using Python directly
 
 ```bash
 python main.py path/to/your/file.xlsx
@@ -125,9 +140,9 @@ Thresholds for different actions:
 
 ## Dependencies
 
-- **openpyxl**: For reading Excel files
-- **fuzzywuzzy**: For fuzzy string matching
-- **python-Levenshtein**: For improved fuzzy matching performance
+Modern, high-performance packages (2025):
+- **python-calamine**: Rust-based Excel reader for massive speed improvements
+- **rapidfuzz**: Fast fuzzy string matching with better licensing and performance
 
 ## Schema Files
 

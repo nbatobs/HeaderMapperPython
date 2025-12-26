@@ -8,9 +8,8 @@ packages = [{include = "**/*.py", from = "."}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-openpyxl = ">=3.1.2"
-fuzzywuzzy = ">=0.18.0"
-python-Levenshtein = ">=0.21.0"
+python-calamine = ">=0.2.0"
+rapidfuzz = ">=3.0.0"
 
 [tool.poetry.group.dev.dependencies]
 

@@ -1,5 +1,5 @@
 from typing import Dict, List, Optional
-from fuzzywuzzy import fuzz
+from rapidfuzz import fuzz
 from models.column_schema import ColumnSchema
 from models.mapping_result import MappingResult
 from models.matching_config import MatchingConfig
