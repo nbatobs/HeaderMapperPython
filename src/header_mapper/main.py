@@ -111,7 +111,7 @@ def start():
         if AI_AVAILABLE:
             print("✓ Initializing AI semantic matcher...")
             try:
-                ai_matcher = AISemanticMatcher()
+                ai_matcher = AISemanticMatcher(disable_ssl_verify=True)
                 print("✓ AI semantic matching enabled")
             except Exception as e:
                 print(f"⚠ Could not initialize AI matcher: {e}")
