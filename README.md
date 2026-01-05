@@ -276,5 +276,3 @@ The AI matcher:
 - **AI semantic matching**: 10-20ms per header (only when needed)
 - **Startup time**: ~2-3 seconds (includes AI model loading and schema embedding)
 - **Memory**: ~200MB (AI model) + minimal for application logic
-
-The layered approach ensures fast performance by using expensive AI matching only as a smart fallback.
