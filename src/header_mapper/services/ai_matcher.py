@@ -4,6 +4,8 @@ AI Semantic Matcher - Uses embeddings for semantic header matching
 
 from typing import Dict, List, Tuple
 import numpy as np
+import ssl
+import os
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -17,13 +19,14 @@ from header_mapper.models.column_schema import ColumnSchema
 class AISemanticMatcher:
     """AI-powered semantic matching using sentence embeddings"""
     
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2", disable_ssl_verify: bool = False):
         """
         Initialize the AI semantic matcher
         
         Args:
             model_name: Name of the sentence-transformers model to use
                        Default is a lightweight ~80MB model that runs on CPU
+            disable_ssl_verify: If True, disables SSL certificate verification (use for corporate networks)
         """
         if not SENTENCE_TRANSFORMERS_AVAILABLE:
             raise ImportError(
@@ -31,7 +34,22 @@ class AISemanticMatcher:
                 "Install it with: pip install sentence-transformers"
             )
         
-        self.model = SentenceTransformer(model_name)
+        # Temporarily disable SSL verification if requested
+        if disable_ssl_verify:
+            # Save original SSL context
+            self._original_ssl_context = ssl._create_default_https_context
+            # Disable SSL verification
+            ssl._create_default_https_context = ssl._create_unverified_context
+            # Also set environment variable for urllib
+            os.environ['CURL_CA_BUNDLE'] = ''
+            os.environ['REQUESTS_CA_BUNDLE'] = ''
+        
+        try:
+            self.model = SentenceTransformer(model_name)
+        finally:
+            # Restore SSL context if it was disabled
+            if disable_ssl_verify:
+                ssl._create_default_https_context = self._original_ssl_context
         self.schema_embeddings = {}
         self.schema_keys = []
     
